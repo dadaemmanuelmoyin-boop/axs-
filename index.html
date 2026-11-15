@@ -154,11 +154,12 @@ body{background:#d9dbe1;color:#222}
 .srs{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:calc(var(--u)*24px)}.srs div:nth-child(2){text-align:center}.srs div:last-child{text-align:right}
 .srs span{display:block;color:#9aa8dc;line-height:1.5}.srs b{display:block;font-weight:700;color:#d0d6f5;line-height:1.35;text-transform:uppercase;min-height:1.35em}
 @media (prefers-color-scheme:light){.srs span{color:#666}.srs b{color:#333}}
-.sx{background:#fff;color:#333;height:calc(100%/.82);overflow:hidden;display:flex;flex-direction:column}
+.sx{background:#fff;color:#333;height:calc(100%/.82);display:flex;flex-direction:column;overflow:hidden}
+#app.x{overflow:hidden}
 .sxh{padding:calc(14px + env(safe-area-inset-top,0px)/.82) 18px 0}.sxh button{font-size:34px;line-height:1;color:#222;width:44px;text-align:left}
-.sxb{flex:1;min-height:0;text-align:center;padding:4px 22px 0;display:flex;flex-direction:column;align-items:center}.sxb svg{flex:0 1 auto;min-height:0;height:min(230px,30vh);width:auto;max-width:80%;margin:6px auto 0}
-.sxb h1{margin:20px 0 12px;font-size:30px;font-weight:800;color:#0b2d6b}.p1{font-size:18px;color:#666;margin:0 0 26px}.p2{font-size:18px;line-height:1.5;color:#666;margin:0;white-space:pre-line}
-.sxf{padding:14px 20px calc(30px + env(safe-area-inset-bottom,0px))}.sxf .pill{width:100%;display:block;padding:17px;font-size:20px}
+.sxb{flex:1;min-height:0;overflow-y:auto;text-align:center;padding:0 22px}.sxb svg{height:clamp(110px,32vh,230px);width:auto;max-width:100%;margin:4px auto 0;display:block}
+.sxb h1{margin:16px 0 8px;font-size:28px;font-weight:800;color:#0b2d6b}.p1{font-size:17px;color:#666;margin:0 0 16px}.p2{font-size:17px;line-height:1.45;color:#666;margin:0;white-space:pre-line}
+.sxf{padding:10px 20px calc(28px + env(safe-area-inset-bottom,0px))}.sxf .pill{width:100%;display:block;padding:17px;font-size:20px}
 .fl2 textarea{display:block;width:100%;margin-top:4px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0b1950;color:#fff;font:inherit;font-size:20px}
 @media (prefers-color-scheme:light){.fl2 textarea{background:#fff;color:#222;border-color:#ccc}}
 </style></head><body><div id="app"></div>
@@ -205,7 +206,7 @@ function qr(c,seed){const n=29,s=10,x=c.getContext("2d");c.width=c.height=n*s;x.
  for(let a=0;a<n;a++)for(let b=0;b<n;b++){let v;if(fin(a,b)){const i=a<7?a:a-(n-7),j=b<7?b:b-(n-7);v=i==0||i==6||j==0||j==6||(i>1&&i<5&&j>1&&j<5)}else v=r()>.5;if(v)x.fillRect(a*s,b*s,s,s)}}
 function drawQR(){const c=$("#qr");if(c)qr(c,S.seed)}
 setInterval(()=>{if(S.scr=="tix"&&S.tab=="t"){S.left--;if(S.left<=0){S.left=60;S.seed=Date.now()%99991;drawQR()}const e=$("#cd");if(e)e.textContent=S.left}},1000);
-function render(){const A=$("#app");A.className=({tix:"t",wiz:"w z",load:"w z",load2:"w z",done:"w z",list:"z",sell:"z"})[S.scr];A.style.setProperty("--u",A.clientWidth/946);A.style.overflowY=S.scr=="done"?"hidden":"";
+function render(){const A=$("#app");A.className=({tix:"t",wiz:"w z",load:"w z",load2:"w z",done:"w z x",list:"z",sell:"z"})[S.scr];A.style.setProperty("--u",A.clientWidth/946);A.style.overflowY=S.scr=="done"?"hidden":"";
  if(S.scr=="list"){const n=act().length;A.innerHTML=`<div class="top"><b style="font-size:17px">Your Events</b><button class="r" aria-label="Account">L</button></div>
  <div class="tabs"><button class="on">Upcoming</button><button>Past</button></div>
  <button class="ev" id="open"><img src="${TH}" alt=""><span><span class="mute">${esc(EV.date)}</span><b>${esc(EV.title)}</b><span class="mute">${n} Ticket${n==1?"":"s"}${n<2?" · "+(2-n)+" transferred":""}</span></span></button>
@@ -264,7 +265,7 @@ function wiz(A){const st=S.step,f=S.f,e=S.err,P=(i,l)=>st==i?`<b class="sp">${i}
  A.querySelectorAll(".tr[data-id]").forEach(b=>b.onclick=()=>{S.sel.has(b.dataset.id)?S.sel.delete(b.dataset.id):S.sel.add(b.dataset.id);render()});
  if(st==2){["first","last","email","email2","note"].forEach(k=>$("#"+k).oninput=ev=>{S.f[k]=ev.target.value;$("#nx").classList.toggle("off",!full())})}
  ["ed1","ed2"].forEach((i,n)=>{const b=$("#"+i);if(b)b.onclick=()=>go({step:n?2:1})});
- $("#nx").onclick=()=>{if(st==1&&!S.sel.size||st==2&&!full())return;if(st==1)go({step:2});else if(st==2){const E={},re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ $("#nx").onclick=()=>{if(st==1&&!S.sel.size||st==2&&!full())return;if(document.activeElement)document.activeElement.blur();if(st==1)go({step:2});else if(st==2){const E={},re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!f.first.trim())E.first="Enter a first name.";if(!f.last.trim())E.last="Enter a last name.";
   if(!re.test(f.email))E.email="Enter a valid email address.";if(f.email2!==f.email)E.email2="Emails don’t match.";
   S.err=E;Object.keys(E).length?render():go({step:3,err:{}})}else confirmTransfer()};
