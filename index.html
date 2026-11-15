@@ -82,7 +82,7 @@ h4{margin:0;font-size:20px;font-weight:700;color:#333}
 .err{color:var(--bad);font-size:12px;padding:4px 20px;background:#fff}
 textarea{width:100%;font:inherit;padding:10px;border:1px solid #c9c9c9;border-radius:4px;background:#f9f9f9;min-height:84px;margin-top:12px}
 .rd{font-size:17px;color:#666;margin-top:6px;word-break:break-all}
-.foot{position:sticky;bottom:0;background:#f5f5f5;padding:14px 20px calc(18px + env(safe-area-inset-bottom,0px));border-top:1px solid #dcdcdc;border-radius:18px 18px 0 0}
+.foot{position:sticky;bottom:0;background:#f5f5f5;padding:14px 20px 22px;border-top:1px solid #dcdcdc;border-radius:18px 18px 0 0}
 .foot .pill{width:100%;display:block;padding:17px}.foot .pill.off{background:#dedede;color:#333}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:20px;z-index:9}
 .modal>div{background:#fff;color:#222;border-radius:14px;padding:20px;width:100%;max-width:340px}
@@ -96,7 +96,7 @@ input,textarea{font-size:20px}html{-webkit-text-size-adjust:100%}
 .fl2 input{display:block;width:100%;margin-top:4px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0b1950;color:#fff;font-family:inherit}
 .tc{background:var(--card);border-radius:12px;padding:6px 14px 14px;margin-top:16px}.tch{display:flex;justify-content:space-between;align-items:center;padding-top:8px}.rm{color:#ff8a9b;font-size:13px}
 .add,.reset{display:block;width:100%;margin-top:14px;padding:13px;border-radius:999px;border:1.5px dashed #3b57c4;color:#9fb8ff;font-weight:700}.reset{border:0;color:var(--mute);font-weight:400}
-.sfoot{position:sticky;bottom:0;padding:24px 16px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 35%)}.sfoot .pill{width:100%;display:block}
+.sfoot{position:sticky;bottom:0;padding:24px 16px 20px;background:linear-gradient(transparent,var(--bg) 35%)}.sfoot .pill{width:100%;display:block}
 
 #app.t{--u:.4154}
 .hd{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:max(calc(env(safe-area-inset-top,0px) - 2px),10px)}
@@ -159,7 +159,7 @@ body{background:#d9dbe1;color:#222}
 .sxh{padding:calc(14px + env(safe-area-inset-top,0px)/.74) 18px 0}.sxh button{font-size:34px;line-height:1;color:#222;width:44px;text-align:left}
 .sxb{flex:1;min-height:0;overflow-y:auto;text-align:center;padding:0 22px}.sxb svg{height:clamp(110px,32vh,230px);width:auto;max-width:100%;margin:4px auto 0;display:block}
 .sxb h1{margin:16px 0 8px;font-size:28px;font-weight:800;color:#0b2d6b}.p1{font-size:17px;color:#666;margin:0 0 16px}.p2{font-size:17px;line-height:1.45;color:#666;margin:0;white-space:pre-line}
-.sxf{padding:10px 20px calc(28px + env(safe-area-inset-bottom,0px))}.sxf .pill{width:100%;display:block;padding:17px;font-size:20px}
+.sxf{padding:10px 20px 22px}.sxf .pill{width:100%;display:block;padding:17px;font-size:20px}
 .fl2 textarea{display:block;width:100%;margin-top:4px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0b1950;color:#fff;font:inherit;font-size:20px}
 @media (prefers-color-scheme:light){.fl2 textarea{background:#fff;color:#222;border-color:#ccc}}
 html{-webkit-text-size-adjust:100%;overflow-x:hidden}body{touch-action:manipulation}
@@ -226,7 +226,7 @@ function render(){const A=$("#app");A.className=({tix:"t",wiz:"w z",load:"w z",l
  <div class="mid2"><img src="${LG}" alt="axs"><span style="font-size:${F.mid}">Mobile ID</span></div><div class="ss" style="font-size:${F.ss}">Screenshots won’t work,<br>your code refreshes every <span id="cd">${S.left}</span> seconds.</div><div class="wr"><button class="wallet2"><img src="${WL}" alt=""><span style="font-size:${F.wal}">Add to Apple Wallet</span></button></div></div>`:
  `<div class="ctr" style="padding:40px 20px"><div class="mute" style="font-size:14px">All your tickets for this event have been transferred.</div></div>`)+
  `<div class="bt"><button id="tr" style="font-size:${F.btn}" ${n?"":"disabled"}>Transfer</button><button id="sell" style="background:#1f3a8f;font-size:${F.btn}">Sell</button></div>`+
- S.tk.map(t=>`<div class="tk2 ${t.st=="A"?"":"off"}"><div class="r1"><span class="tr1" style="font-size:${F.tier}"><i class="star2">★</i>${esc(t.tier)}</span><span class="ty" style="font-size:${F.type}">${t.st=="A"?esc(t.type):"Transferred"}</span></div>${srs(t,tn)}<div class="bg2" style="font-size:${F.big}">${esc(t.name)}</div><div class="id2" style="font-size:${F.id}">Ticket ID: ${esc(t.id)}</div>${t.st=="A"?"":`<div class="id2" style="font-size:${F.id}">Sent to ${esc(t.to)}</div>`}</div>`).join("")+`<div style="height:40px"></div>`);
+ S.tk.map(t=>`<div class="tk2 ${t.st=="A"?"":"off"}"><div class="r1"><span class="tr1" style="font-size:${F.tier}"><i class="star2">★</i>${esc(t.tier)}</span><span class="ty" style="font-size:${F.type}">${t.st=="A"?esc(t.type):"Transferred"}</span></div>${srs(t,tn)}<div class="bg2" style="font-size:${F.big}">${esc(t.name)}</div><div class="id2" style="font-size:${F.id}">Ticket ID: ${esc(t.id)}</div>${t.st=="A"?"":`<div class="id2" style="font-size:${F.id}">Sent to ${esc(t.to)}</div>`}</div>`).join("")+`<div style="height:20px"></div>`);
  $("#bk").onclick=()=>go({scr:"list"});A.querySelectorAll(".tb button").forEach(b=>b.onclick=()=>go({tab:b.dataset.t}));
  const t=$("#tr");if(t)t.onclick=()=>{go({scr:"load"});setTimeout(()=>{if(S.scr=="load")go({scr:"wiz",step:1,sel:new Set(),err:{},f:{first:"",last:"",email:"",email2:"",note:""}})},1200)};
  $("#sell").onclick=()=>go({scr:"sell",draft:{title:EV.title,date:EV.date,owner:OWNER,img:CUR,sx:{...SX},tk:S.tk.map(({id,name,sec,row,seat,tier,type,cell})=>({id,name,sec,row,seat,tier,type,cell}))}});
