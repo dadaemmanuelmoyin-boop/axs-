@@ -67,13 +67,13 @@ h4{margin:0;font-size:20px;font-weight:700;color:#333}
 .link{color:#0a6bdc;font-weight:800;font-size:16px}
 .card{background:#fff;border-radius:16px;overflow:hidden}.card1{border:2px solid #1a73e8}
 .card .big{width:76px;height:76px;border-radius:14px;margin:16px}
-.tr{display:grid;grid-template-columns:42px 1fr 56px 64px;align-items:start;padding:16px 14px;width:100%;text-align:left;font-size:22px;font-weight:400;color:#333;background:none}
+.tr{display:grid;grid-template-columns:42px 1fr 56px 64px;align-items:center;padding:16px 14px;width:100%;text-align:left;font-size:22px;font-weight:400;color:#333;background:none}
 .tr>span:nth-child(3){text-align:center}.tr>span:nth-child(4){text-align:right}
 .tr.rv{grid-template-columns:1fr 56px 64px;padding:16px 18px}.tr.rv>span:nth-child(2){text-align:center}.tr.rv>span:nth-child(3){text-align:right}
 .tr>span.ad{grid-column:3/5;text-align:right;font-size:19px}.tr.rv>span.ad{grid-column:2/4}
 .tr.h0{background:#ececec;color:#777;font-size:16px;padding:10px 14px;align-items:center}
 .tr small{display:block;font-size:15px;color:#777;margin-top:4px}
-.cb{width:26px;height:26px;border-radius:4px;border:2px solid #a8a8a8;display:grid;place-items:center;color:#fff;font-size:17px;margin-top:2px}
+.cb{width:26px;height:26px;border-radius:4px;border:2px solid #a8a8a8;display:grid;place-items:center;color:#fff;font-size:17px;margin:0;flex:none}
 .tr.on .cb{background:#1a73e8;border-color:#1a73e8}
 .sel{background:#fff;border-radius:999px;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#0a6bdc;font-weight:800;font-size:19px;margin:14px 0 0;width:100%}.sel i{color:#666;font-style:normal;font-size:20px}
 .fl{background:#fff;margin:0 -20px}.fr{display:flex;align-items:center;padding:0 20px;height:54px;border-bottom:1px solid #e6e6e6}
@@ -260,7 +260,7 @@ function wiz(A){const st=S.step,f=S.f,e=S.err,P=(i,l)=>st==i?`<b class="sp">${i}
  let h=`<div class="lt"><div class="sh"><div class="wh"><button id="x" aria-label="${st==1?"Close":"Back"}">${st==1?"✕":"‹"}</button>${P(1,"Select")}${L(1)}${P(2,"Recipient")}${L(2)}${P(3,"Review")}</div>`+
  (st>1?`<div class="es"><img src="${TH}" alt=""><div><div class="et">${esc(EV.title)}</div><div class="ed">${esc(EV.date)}</div></div><div class="tkt">${S.sel.size}<i>➜</i></div></div>`:"")+`</div><div class="body">`;
  if(st==1){h+=`<h2>Select Seats to Transfer</h2><div class="card card1"><img class="big" src="${TH}" alt=""><div class="tr h0"><span></span><span>Sec</span><span>Row</span><span>Seat</span></div>`+
- act().map(t=>`<button class="tr ${S.sel.has(t.id)?"on":""}" data-id="${t.id}" role="checkbox" aria-checked="${S.sel.has(t.id)}"><span class="cb">${S.sel.has(t.id)?"✓":""}</span>${cells(t)}</button>`).join("")+`</div>`}
+ act().map(t=>`<button class="tr ${S.sel.has(t.id)?"on":""}" data-id="${t.id}" role="checkbox" aria-checked="${S.sel.has(t.id)}"><span class="cb">${S.sel.has(t.id)?'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>':""}</span>${cells(t)}</button>`).join("")+`</div>`}
  if(st==2){const R=(k,l,t="text")=>`<div class="fr"><label for="${k}">${l}</label><input id="${k}" type="${t}" value="${esc(f[k])}" placeholder="Required" autocomplete="off"></div>${e[k]?`<div class="err">${e[k]}</div>`:""}`;
  h+=`<h2>Add Recipient</h2><h4>Recent Recipients</h4><button class="sel" type="button">Select<i>⌄</i></button><div class="sec"><h4>Recipient</h4><button class="link" type="button">Add from Contacts</button></div><div class="fl">`+R("first","First Name")+R("last","Last Name")+R("email","Email","email")+R("email2","Confirm Email","email")+`</div><div class="sec" style="margin-bottom:0"><h4>Message to Recipient</h4></div><textarea id="note" maxlength="200" aria-label="Message to recipient">${esc(f.note)}</textarea>`}
  if(st==3){h+=`<h2>Review Your Transfer</h2><div class="sec" style="margin-top:34px"><h4>Tickets To Be Transferred</h4><button class="link" id="ed1">Edit</button></div><div class="card"><div class="tr rv h0"><span>Sec</span><span>Row</span><span>Seat</span></div>`+
